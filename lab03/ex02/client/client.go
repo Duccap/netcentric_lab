@@ -135,7 +135,4 @@ func main() {
 	} else {
 		fmt.Println("Login failed:", response.Message)
 	}
-	///VIet them de client nhan hay read tu server sau khi login de
-	///biet success ful hay ko de vao game
-
 }
