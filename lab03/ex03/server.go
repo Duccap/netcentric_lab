@@ -33,6 +33,13 @@ type Response struct {
 }
 
 func readFromJSONFile(filename string) ([]Credentials, error) {
+	if _, err := os.Stat(filename); os.IsNotExist(err) {
+		fmt.Printf("File %s does not exist\n", filename)
+		return nil, fmt.Errorf("file does not exist: %v", err)
+	} else {
+		fmt.Printf("File %s exists\n", filename)
+	}
+	
 	file, err := os.Open(filename)
 	if err != nil {
 		return nil, fmt.Errorf("error opening file: %v", err)
@@ -45,7 +52,7 @@ func readFromJSONFile(filename string) ([]Credentials, error) {
 		return nil, fmt.Errorf("error decoding JSON: %v", err)
 	}
 
-	return credentials, nil //decode json to slice of Credentialss
+	return credentials, nil //decode json to slice of Credentials
 }
 
 func authenticate(credentials []Credentials, clientCredentials Credentials) Response {
