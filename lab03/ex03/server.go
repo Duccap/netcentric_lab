@@ -23,13 +23,9 @@ const (
 
 type Credentials struct {
 	Email string `json:"email"`
-	// Username string `json:"name"`
 	Password string `json:"password"`
 }
 
-// type UserList struct {
-// 	Users []User `json:"users"`
-// }
 
 type Response struct {
 	Success bool   `json:"success"`
@@ -49,15 +45,7 @@ func readFromJSONFile(filename string) ([]Credentials, error) {
 		return nil, fmt.Errorf("error decoding JSON: %v", err)
 	}
 
-	return credentials, nil
-}
-
-func hashPassword(password string) ([]byte, error) {
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-	if err != nil {
-		return nil, err
-	}
-	return hashedPassword, nil
+	return credentials, nil //decode json to slice of Credentialss
 }
 
 func authenticate(credentials []Credentials, clientCredentials Credentials) Response {
